@@ -1,0 +1,47 @@
+<!--<p id="notice"></p>-->
+<div class="container">
+
+  <div class="row">
+
+    <div class="col-md-3">
+      <%= render partial: 'users/user', locals: { user: @user, book: @bookn } %>
+    </div>
+
+    <div class="col-md-8 offset-md-1">
+      <h2>Book detail</h2>
+      <table class="table">
+
+        <tbody>
+          <tr>
+            <td>
+              <%= link_to user_path(@book.user_id) do %>
+                <%= image_tag @book.user.get_profile_image(40,40), class: "attachment user profile_image fallback" %>
+                <br><%= @book.user.name %>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to book_path(@book) do %>
+              <%= @book.title %></td>
+              <% end %>
+            <td><%= @book.body %></td>
+            <td>
+              <% if @book.user == current_user %>
+                <%= link_to(edit_book_path(@book), class: "btn-success btn") do %>
+                  Edit
+                <% end %>
+              <% end %>
+            </td>
+            <td>
+              <% if @book.user == current_user %>
+                <%= link_to "Destroy", book_path(@book), method: :delete, class: "btn-danger btn" %>
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
+
+      </table>
+    </div>
+
+  </div>
+
+</div>

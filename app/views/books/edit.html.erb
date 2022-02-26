@@ -1,0 +1,54 @@
+<!--<p id="notice"></p>-->
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+      <h1>Editing Book</h1>
+
+      <!--エラー記載-->
+      <div id="error_explanation" class="text-danger">
+        <% if @book.errors.any? %>
+        <h3>
+          <% if @book.errors.count == 1 then %>
+            1 error prohibited this obj from being saved:
+          <% else %>
+            <%= @book.errors.count %>
+            errors prohibited this obj from being saved:
+          <% end %>
+        </h3>
+          <ul>
+            <% @book.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+
+      <%= form_with model: @book do |f| %>
+
+        <div class="form-group">
+        <label for="book_title">Title</label>
+        <%= f.text_field :title, autofocus: true, class: "form-control book_title" %>
+        </div>
+        <div class="form-group">
+          <label for="book_opinion">Opinion</label>
+          <%= f.text_area :body, autofocus: true, class: "form-control book_body" %>
+        </div>
+        <div class="form-group">
+          <%= f.submit 'Update Book', class: "btn btn-success" %>
+        </div>
+      <% end %>
+
+      <%= link_to book_path(@book) do %>
+      Show
+      <% end %>
+      |
+      <%= link_to books_path do %>
+      Back
+      <% end %>
+
+
+
+
+    </div>
+  </div>
+</div>
